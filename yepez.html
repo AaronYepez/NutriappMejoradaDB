@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+    <div class="position-relative text-center">
+        <img src="https://img.freepik.com/premium-photo/healthy-foods-background-with-copy-space-banner-card-generative-ai_159242-26737.jpg?w=2000"
+            class="w-100">
+        <div class="position-absolute top-0 start-0 w-100 h-100 overflow-y-auto">
+            <div class="d-flex flex-column justify-content-center align-items-center h-100 text-center position-absolute top-50 start-50 translate-middle">
+                <h1 class="text-dark mb-4">Bienvenido a tu espacio saludable</h1>
+                <div class="d-grid gap-2 d-md-block">
+                    <a href="\principal\1" class="btn btn-primary btn-custom">Continuar como invitado</a>
+                    {% if not session.get('valida') %}
+    <a href="{{ url_for('registrosecion', paso=1) }}" class="btn btn-outline-secondary">
+        Crear cuenta
+    </a>
+{% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
