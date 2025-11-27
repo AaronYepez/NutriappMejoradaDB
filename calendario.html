@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<div class="position-relative text-center">
+    <img src="https://img.freepik.com/premium-photo/healthy-foods-background-with-copy-space-banner-card-generative-ai_159242-26737.jpg?w=2000"
+        class="w-100">
+    <div class="position-absolute top-0 start-0 w-100 h-100 overflow-y-auto">
+
+        <div class="container border border-2 border-black d-flex rounded mb-3 my-5 align-items-center justify-content-center"
+            style="max-width: 800px; height: 100px; background-color: #7DF9FF;">
+            <h2 class="fw-lighter text-black">Calculadora de Macronutrientes</h2>
+            <i class="bi bi-graph-up fs-2 text-black"></i>
+        </div>
+
+        <div class="card mx-auto my-5 bg-dark bg-opacity-75" style="width: 750px;">
+            <img src="https://static.wixstatic.com/media/eb24be_5774a2ac39c2499984c7e1834d008d25~mv2.png/v1/fill/w_1000,h_563,al_c,q_90,usm_0.66_1.00_0.01/eb24be_5774a2ac39c2499984c7e1834d008d25~mv2.png"
+                class="card-img-top" style="width: 750px; height: 375px;">
+            <div class="card-body">
+
+                <form id="macroscal" method="post" action="{{url_for('macroscal')}}">
+                    <div class="row mb-3">
+                        <div class="col-4">
+                            <input type="number" class="form-control border border-0" placeholder="Peso(kg)" name="peso"
+                            style="background-color: #7DF9FF;"value="{{ request.form.get('peso', '') }}">
+                        </div>
+                        <div class="col-4">
+                            <input type="number" class="form-control border border-0" placeholder="Altura(cm)" name="altura"
+                            style="background-color: #7DF9FF;" value="{{ request.form.get('altura', '') }}">
+                        </div>
+                        <div class="col-4">
+                            <input type="number" class="form-control border border-0" placeholder="Edad(años)" name="edad"
+                            style="background-color: #7DF9FF;" value="{{ request.form.get('edad', '') }}">
+                        </div>
+                    </div>
+
+                    <input type="number" class="form-control mb-3 border-0" placeholder="% de grasa" name="grasa"
+                        style="background-color: #7DF9FF;" value="{{ request.form.get('grasa', '') }}">
+
+                    <select name="genero" class="form-select form-select-sm mb-3 border-0"
+                        style="background-color: #7DF9FF;" aria-label="Small select example">
+                        <option selected>Selecciona tu genero</option>
+                        <option value="hombre">Hombre</option>
+                        <option value="mujer">Mujer</option>
+                    </select>
+
+                    <select name="actividad" class="form-select form-select-sm mb-3 border-0"
+                        style="background-color: #7DF9FF;" aria-label="Small select example">
+                        <option selected>Selecciona tu nivel de actividad</option>
+                        <option value="sedentario">Sedentario</option>
+                        <option value="activo">Activo</option>
+                        <option value="altoRendimiento">Alto rendimiento</option>
+                    </select>
+
+                    <select name="objetivos" class="form-select form-select-sm mb-3 border-0"
+                        style="background-color: #7DF9FF;" aria-label="Small select example">
+                        <option selected>Selecciona un objetivo</option>
+                        <option value="-peso">Perder peso</option>
+                        <option value="+musculo">Ganar musculo</option>
+                        <option value="=peso">Mantenerse en su peso</option>
+                    </select>
+
+                    <hr class="my-4 border-3 opacity-100" style="border-color:#7DF9FF;">
+
+                    <div class="row">
+                        <div class="col-8">
+                            <p class="fw-semi-bolder text-start" style="color: #7DF9FF;">Resultados: 
+                                {% if resultados %}
+                                Calorias:<strong>{{resultados.cal}}</strong>
+                                Proteinas:<strong>{{resultados.pro}}</strong>
+                                Carbohidratos:<strong>{{resultados.carbo}}</strong>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="submit" class="btn" style="background-color: #7DF9FF;">
+                                    <i class="bi bi-calculator fs-5"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
