@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriApp</title>
+    <link rel="icon" href="https://i.pinimg.com/originals/01/a6/42/01a6420f5e529edde707a2a28892e9dd.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <header class="fixed-top">
+        <nav class="navbar" style="background-color: white;">
+            <div class="row">
+                <div class="col-1">ㅤ</div>
+                <div class="container-fluid col-3"> 
+                    <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent"
+                        aria-controls="navbarToggleExternalContent" aria-expanded="false"
+                        aria-label="Toggle navigation"> 
+                        <span class="navbar-toggler-icon"></span> 
+                    </button>
+                </div>
+                <div class="container-fluid col-4"> 
+                    <a class="navbar-brand" href="{{'/' if not session.valida or session.valida == False else '/principal/1'}}"> 
+                        <img src="https://i.pinimg.com/originals/01/a6/42/01a6420f5e529edde707a2a28892e9dd.png" alt="Logo" width="40" height="40"
+                                class="d-inline-block align-text-top"> 
+                                App Nutricional
+                    </a> 
+                </div>
+                <div class="position-absolute top-50 end-0 translate-middle-y col-4">
+                    <form id="buscar" method="post" action="{{url_for('buscar')}}" class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="busqueda" 
+                        value="{{ request.form.get('busqueda', '') }}" style="width: 250px;">
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="p-4" style="background-color: #F3FFF7;">
+                <h5 class="text-body-emphasis h4">Aplicacion de nutricion</h5>
+                <p><span class="text-body-secondary">Contenido de nutriApp</span></p>
+                <ul>
+                    <li>
+                    <a class="navbar-brand" href="/registrosecion/1"> 
+                        <img src="https://icon-library.com/images/login-icon/login-icon-3.jpg" alt="Logo" width="20" height="20"
+                                class="d-inline-block align-text-top"> 
+                                Crear cuenta
+                    </a>
+                </li>
+                <li>
+                    <a class="navbar-brand" href="/macroscal"> 
+                        <img src="https://www.pngmart.com/files/21/Agenda-PNG-Pic.png" alt="Logo" width="20" height="20"
+                                class="d-inline-block align-text-top"> 
+                                Plan alimenticio
+                    </a>
+                </li>
+                <li>
+                    <a class="navbar-brand" href="/crtlComida"> 
+                        <img src="https://th.bing.com/th/id/R.5f58199705702af0d04a52096774e8cd?rik=Te%2fBTLdC%2fJxSsg&pid=ImgRaw&r=0" alt="Logo" width="20" height="20"
+                                class="d-inline-block align-text-top"> 
+                                Control alimenticio
+                    </a>
+                </li>
+                
+
+                {% if not session.valida or session.valida == False %}
+                    <li>
+                        <a class="navbar-brand" href="/inciosecion"> 
+                            <img src="https://pic.mksucai.com/00/38/60/68b5f78b5e22acdb.webp" alt="Logo" width="20" height="20"
+                                class="d-inline-block align-text-top"> 
+                                Iniciar Sesion
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Bienvenido {{session.nombre}}
+                        </a>
+                        <ul class="dropdown-menu text-center">
+                            <li class="mb-2">
+                                <img src="{{session.imagen}}"
+                                    alt="Perfil" class="rounded-circle" style="width: 70px; height: 70px;">
+                            </li>
+                            <li class="mb-2 fw-semibold">{{session.nombre}}</li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item fw-semibold" tabindex="0" href="#"> Perfil </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-danger fw-bold" tabindex="0" href="/logout"> Cerrar sesión </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+
+                    
+                
+                </ul>
+                
+            </div>
+        </div>
+    </header>
+
+    <main class="mt-5">
+        {% block contenido %}
+    
+        {% endblock %} 
+    </main>
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
