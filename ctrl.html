@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<div class="position-relative text-center">
+  <img
+    src="https://img.freepik.com/premium-photo/healthy-foods-background-with-copy-space-banner-card-generative-ai_159242-26737.jpg?w=2000"
+    class="w-100">
+  <div class="position-absolute top-0 start-0 w-100 h-100 overflow-y-auto">
+    <div
+      class="container border border-2 border-black d-flex rounded mb-3 my-5 align-items-center justify-content-center"
+      style="max-width: 800px; height: 100px; background-color: #f6e652;">
+      <h2 class="fw-lighter text-black">Calculadora de Gasto Calórico Total (GCT)</h2>
+      <i class="bi bi-battery-half fs-2 text-black"></i>
+    </div>
+
+    <div class="card mx-auto my-5 bg-dark bg-opacity-75" style="width: 750px;">
+      <img src="https://fitgeneration.es/wp-content/uploads/2023/06/Gasto-energetico-diario-GET-52.png" class="card-img-top" style="width: 750px; height: 350px;">
+      <div class="card-body">
+
+        <form id="control" method="post" action="{{url_for('control')}}">
+          <div class="row mb-3">
+            <div class="col-4">
+              <input type="number" class="form-control border border-0" placeholder="Peso(kg)" name="peso"
+                value="{{ request.form.get('peso', '') }}" style="background-color: #f6e652;">
+            </div>
+            <div class="col-4">
+              <input type="number" class="form-control border border-0" placeholder="Altura(cm)" name="altura"
+                value="{{ request.form.get('altura', '') }}" style="background-color: #f6e652;">
+            </div>
+            <div class="col-4">
+              <input type="number" class="form-control border border-0" placeholder="Edad(años)" name="edad"
+                value="{{ request.form.get('edad', '') }}" style="background-color: #f6e652;">
+            </div>
+          </div>
+
+          <select name="genero" class="form-select form-select-sm mb-3 border-0" style="background-color: #f6e652;" aria-label="Small select example">
+            <option selected>Selecciona tu genero</option>
+            <option value="hombre">Hombre</option>
+            <option value="mujer">Mujer</option>
+          </select>
+          
+          <select name="actividad" class="form-select form-select-sm border border-0" style="background-color: #f6e652;" aria-label="Small select example">
+            <option selected>Selecciona una opcion</option>
+            <option value="sedentario">Sedentario</option>
+            <option value="activo">Activo</option>
+            <option value="altoRendimiento">Alto rendimiento</option>
+          </select>
+          
+
+          <hr class="my-4 border-3 border-warning opacity-100">
+
+          <div class="row">
+            <div class="col-8">
+              <p class="fw-semi-bolder text-warning text-start">Tu gasto energético kcal/día es: {% if resultado %}<strong>{{resultado}}</strong>{% endif %}</p>
+            </div>
+            <div class="col-4">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-outline-warning" s><i class="bi bi-calculator fs-5"></i></button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
