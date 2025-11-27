@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<div class="card text-bg-dark">
+    <img src="https://www.somosmamas.com.ar/wp-content/uploads/2019/04/comidas-saludables.jpg" class="card-img">
+    <div class="card-img-overlay">
+        <p>ㅤㅤ</p>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                <div class="container text-center shadow-sm p-3 mb-5 bg-body-tertiary rounded bg-danger-subtle">
+                    <h3>🔓Inicio de Sesion🔓</h3>
+                </div>
+                <div class="row" style="background-color: 255, 250, 250;">
+                    <h6 class="text-secondary">ㅤㅤAñadir nuevo usuario:</h6>
+                    <form id="valida" method="post" action="{{url_for('valida')}}">
+                        <p>ㅤㅤ</p>
+                        <input type="text" class="form-control border" placeholder="Correo electronico" name="email"
+                            value="{{ request.form.get('email', '') }}">
+                        <p>ㅤㅤ</p>
+                        <input type="password" class="form-control border" placeholder="Contraseña" name="password"
+                            value="{{ request.form.get('password', '') }}">
+                    </form>
+                    <p>ㅤㅤ</p>
+                    <div class="d-grid gap-2 mx-auto">
+                        <button type="submit" class="btn btn-danger text-light border" form="valida">Iniciar Sesion</button>
+                        <a href="/" class="btn btn-danger" role="button" aria-disabled="true">Volver a inicio</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+        <div class="row">
+            <div class="container mt-4">
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show"
+                    role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
